@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.db.models.fields.related import ForeignKey
-from django.utils import timezone
+from django.db.models.constraints import UniqueConstraint
+
+from datetime import date
 
 class User(AbstractUser):
     def __repr__(self):
@@ -9,17 +10,24 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
 class Habit(models.Model):
-    user = models.ForeignKey(to=User,on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    goal = models.PositiveIntegerField()
-    created_date = models.DateTimeField(default=timezone.now)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=256)
+    target = models.PositiveIntegerField()
+    created_at = models.DateField(default=date.today)
 
     def __str__(self):
         return self.name
 
-class HabitTracker(models.Model):
 
-    habit = models.ForeignKey(Habit, on_delete=models.CASCADE)
-    results = models.PositiveIntegerField()
-    date = models.DateField(null=True)
+class Record(models.Model):
+    habit = models.ForeignKey(Habit, null=True, on_delete=models.CASCADE, related_name="records")
+    outcome = models.PositiveIntegerField()
+    date = models.DateField()
+
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields=['habit', 'outcome', 'date'], name='unique_records')
+        ]
