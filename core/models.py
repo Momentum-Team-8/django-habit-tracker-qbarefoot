@@ -16,7 +16,7 @@ class Habit(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
     target = models.PositiveIntegerField()
-    created_at = models.DateField(default=date.today)
+    created_date = models.DateField(default=date.today)
 
     def __str__(self):
         return self.name
