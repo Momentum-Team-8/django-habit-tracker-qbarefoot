@@ -1,10 +1,9 @@
 from django.db.models.fields import BooleanField
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import User, Habit, Record
+from .models import Habit, Record
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .forms import HabitForm, HabitRecordForm
-from django.http import JsonResponse
 
 # Create your views here.
 def homepage(request):
@@ -19,6 +18,13 @@ def list_habit(request):
     habit = Habit.objects.all()
     return render(request, "habittracker/list_habit.html", {"habit": habit})
 
+@login_required
+def list_record(request, pk):
+    habit = get_object_or_404(Habit, pk=pk)
+    return render(request, "habittracker/list_habit.html", {"records": records, "habit": habit, "pk": pk})
+
+
+@login_required
 def add_habit(request):
     if request.method == 'POST':
         form = HabitForm(request.POST)
@@ -26,7 +32,7 @@ def add_habit(request):
             habit = form.save(commit=False)
             habit.created_date = timezone.now()
             habit.save()
-            return redirect('add_habit')
+            return redirect('list_habit')
     else:
         form = HabitForm()
     return render(request, 'habittracker/add_habit.html', {'form': form})

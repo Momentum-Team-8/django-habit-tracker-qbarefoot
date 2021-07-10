@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<h1>Edit Card</h1>
+<h1>Edit Habit</h1>
 
 
 <div>
-    <form action="{% url 'edit_habit' pk=card.pk %}" method="POST">
+    <form action="{% url 'edit_habit' pk=habit.pk %}" method="POST">
         {% csrf_token %} {{ form.as_p }}
         <div>
         <button type='submit'>Edit Habit</button>

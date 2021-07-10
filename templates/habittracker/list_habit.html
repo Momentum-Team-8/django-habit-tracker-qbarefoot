@@ -14,13 +14,13 @@
 <div class="parent is-flex-wrap-wrap columns">
 <div class="card is-flex-wrap-wrap column is-half is-offset-one-quarter column">
         <header class="card-header">
-          <p class="card-header-title"><a href="{% url 'list_habit' pk=deck.pk %}">
+          <p class="card-header-title"><a href="{% url 'list_record' pk=habit.pk %}">
            {{habit.title}}</a>
           </p>
         </header>
         <div class="card-content">
           <div class="content">
-            Deck created at:
+            Habit created at:
             <br>
             <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
           </div>

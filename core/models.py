@@ -18,9 +18,11 @@ class Habit(models.Model):
     target = models.PositiveIntegerField()
     created_date = models.DateField(default=date.today)
 
-    def __str__(self):
-        return self.name
+    def __repr__(self):
+        return f"<Habit title={self.title}>"
 
+    def __str__(self):
+        return self.title
 
 class Record(models.Model):
     habit = models.ForeignKey(Habit, null=True, on_delete=models.CASCADE, related_name="records")
