@@ -10,12 +10,12 @@
 </a>
 
 
-{% for deck in decks %}
+{% for habit in habits %}
 <div class="parent is-flex-wrap-wrap columns">
 <div class="card is-flex-wrap-wrap column is-half is-offset-one-quarter column">
         <header class="card-header">
-          <p class="card-header-title"><a href="{% url 'list_card' pk=deck.pk %}">
-           {{deck.title}}</a>
+          <p class="card-header-title"><a href="{% url 'list_habit' pk=deck.pk %}">
+           {{habit.title}}</a>
           </p>
         </header>
         <div class="card-content">

@@ -16,8 +16,8 @@ def profile_page(request):
 
 @login_required
 def list_habit(request):
-    habits = Habit.objects.all()
-    return render(request, "habittracker/list_habit.html", {"habits": habits})
+    habit = Habit.objects.all()
+    return render(request, "habittracker/list_habit.html", {"habit": habit})
 
 def add_habit(request):
     if request.method == 'POST':
