@@ -1,13 +1,16 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-    <title>Habit Tracker</title>
-    
-    </head>
-    <body>
+  <head>
+    <title>Django-Habit-Tracker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    {% block javascript %}
+    {% endblock %}
+  </head>
+  <body>
     <header class="page-header">
-        <div class="container">
+    <div class="container"></div>
         <div class="notification has-background-info-dark has-text-white">
           <section>
           <h1><a href="/">Habit Tracker</a></h1>
@@ -33,4 +36,5 @@
         {% endblock %}</div>
       </main>
     </body>
+    </html>
     </html>

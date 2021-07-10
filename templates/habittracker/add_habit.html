@@ -1,14 +1,9 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 
-{% block content %}
-
-<h1>Add Card</h1>
-
-
-<div>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save">Save</button>
-    </form>
-</div>
+{{% block content %}
+<h2>New Habit</h2>
+<form method="POST" class="post-form">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="save">Save</button>
+</form>
 {% endblock %}
