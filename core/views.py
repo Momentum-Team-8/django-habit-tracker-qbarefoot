@@ -18,11 +18,6 @@ def list_habit(request):
     habit = Habit.objects.all()
     return render(request, "habittracker/list_habit.html", {"habit": habit})
 
-@login_required
-def list_record(request, pk):
-    habit = get_object_or_404(Habit, pk=pk)
-    return render(request, "habittracker/list_habit.html", {"records": records, "habit": habit, "pk": pk})
-
 
 @login_required
 def add_habit(request):
