@@ -19,10 +19,10 @@ class Habit(models.Model):
     created_date = models.DateField(default=date.today)
 
     def __repr__(self):
-        return f"<Habit title={self.title}>"
+        return f"<Habit name={self.name}>"
 
     def __str__(self):
-        return self.title
+        return self.name
 
 class Record(models.Model):
     habit = models.ForeignKey(Habit, null=True, on_delete=models.CASCADE, related_name="records")

@@ -32,6 +32,7 @@ def add_habit(request):
         form = HabitForm()
     return render(request, 'habittracker/add_habit.html', {'form': form})
 
+
 @login_required
 def edit_habit(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
@@ -46,8 +47,32 @@ def edit_habit(request, pk):
         form = HabitForm()
     return render(request, 'habittracker/add_habit.html', {'form': form})
 
+
 @login_required
 def delete_habit(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
-    habit.delete()
-    return redirect('list_habit')
+    if request.method == 'POST':
+        habit.delete()
+        return redirect('list_habit')
+    return render(request, 'habittracker/delete_habit.html', {'habit': habit})
+
+@login_required
+def display_habit(request, pk):
+    habit = get_object_or_404(Habit, pk=pk)
+    if request.method == 'POST':
+        return redirect('list_habit')
+    return render(request, 'habittracker/display_habit.html', {'habit': habit})
+
+
+def add_record(request,pk):
+    habit = get_object_or_404(Habit, pk=pk)
+    if request.method == "POST": 
+        form = HabitRecordForm(data=request.POST)
+        if form.is_valid():
+            record = form.save(commit=False)
+            record.habit=habit
+            record.save()
+            return redirect('display_habit', pk=habit.pk)
+        else:
+            form = HabitRecordForm()
+        return render(request, 'habittracker/add_record.html', {'form': form, 'habit': habit})
