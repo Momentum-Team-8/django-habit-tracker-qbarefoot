@@ -65,14 +65,18 @@ def display_habit(request, pk):
 
 
 def add_record(request,pk):
-    habit = get_object_or_404(Habit, pk=pk)
+    habit= get_object_or_404(Habit, pk=pk)
     if request.method == "POST": 
         form = HabitRecordForm(data=request.POST)
         if form.is_valid():
-            record = form.save(commit=False)
-            record.habit=habit
-            record.save()
-            return redirect('display_habit', pk=habit.pk)
-        else:
-            form = HabitRecordForm()
-        return render(request, 'habittracker/add_record.html', {'form': form, 'habit': habit})
+            add_record = form.save(commit=False)
+            add_record.habit = habit
+            add_record.save()
+            add_record.habit = habit
+            add_record.save()
+            return redirect(to="display_habit", pk=habit.pk)
+    else:
+        form = HabitRecordForm()
+
+    return render(
+        request, "habittracker/add_record.html", {"form": form, "habit": habit})

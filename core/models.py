@@ -27,9 +27,9 @@ class Habit(models.Model):
 class Record(models.Model):
     habit = models.ForeignKey(Habit, null=True, on_delete=models.CASCADE, related_name="records")
     outcome = models.PositiveIntegerField()
-    date = models.DateField()
+    date = models.DateField(default=date.today)
 
     class Meta:
         constraints = [
-            UniqueConstraint(fields=['habit', 'outcome', 'date'], name='unique_records')
+            UniqueConstraint(fields=['habit', 'outcome', 'date'], name='unique_record')
         ]
